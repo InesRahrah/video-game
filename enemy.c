@@ -134,71 +134,26 @@ int collision(personne p, ennemie e) {
 void moveIA(ennemie *e ,personne *p)
 {
 
-/*int d=abs(e->pos.y-p->posScreen.y);//414
-int s1=100;//380
-int s2=150;//50
+int distance = abs(e->pos.x - p->posScreen.x);
+  int s1 = 600; // distance pour passer de l'état Waiting à Following//400
+ int speed=6;
+ 
+      if (distance <= s1) {
+     if (e->pos.x > p->posScreen.x) {
+        
+        e->direction = 0;
+        e->pos.x-=speed;
+        printf("oui"); 
+      }
+      
+    else if
+       (distance > s1) {
+        e->direction =1;
+        e->pos.x+=speed;
+        printf("non");
 
-switch(e->etat){
-   case 0://waiting
-    if (d<=0)
-       {e->etat=0;
-         printf("wait\n");}
- else if(s2<d && d<=s1)
-          {printf("start\n");
-e->etat=1;}//waiting->following
-          //printf("start\n");}
-     break;
-   case 1://following
-       if(0<d && d<=s2)
-           { e->etat=2;//following->attacking
-             printf("attack\n");}
- else if (s2<d && d<=s1) 
-         e->etat=1;
- else if (d<=0)
-         e->etat=0;
-      printf("commence\n");
-      break;
-   case 2://attacking
-    if(0<d && d<=s2)
-          e->etat=2;
-else if(d<=0)
-           e->etat=0;//attacking->following
-    printf("retour\n");
-       break;
-}
-}  */ 
-
-  int d = abs(e->pos.x - p->posScreen.x);
-    int s1 = 100;//70 // distance à partir de laquelle l'ennemi commence à suivre
-    int s2 = 110;//80 // distance à partir de laquelle l'ennemi attaque
-
-    switch (e->etat) {
-        case 0: // en mouvement aléatoire
-            if (d <= s1) {
-                e->etat = 1; // commence à suivre le joueur
-                printf("L'ennemi commence à suivre le joueur.\n");
-            }
-            break;
-        case 1: // en train de suivre le joueur
-            if (d <= s2) {
-                e->etat = 2; // commence à attaquer le joueur
-                printf("L'ennemi attaque le joueur.\n");
-            }
-            else if (d > s1) {
-                e->etat = 0; // retourne en mouvement aléatoire
-                printf("L'ennemi retourne en mouvement aléatoire.\n");
-            }
-            break;
-        case 2: // en train d'attaquer le joueur
-            if (d > s2) {
-                e->etat = 1; // arrête l'attaque et suit le joueur
-                printf("L'ennemi arrête l'attaque et suit le joueur.\n");
-            }
-            break;
-        default:
-            printf("Erreur : état inconnu pour l'ennemi.\n");
-            break;
-    }
+      }}
+    
 }
 
 
